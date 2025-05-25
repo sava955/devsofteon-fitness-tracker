@@ -25,7 +25,7 @@
           (click)="getPreviousDay()"
           mat-icon-button
           aria-label="Next day"
-          [disabled]="day < startDate"
+          [disabled]="isPreviousDisabled()"
         >
           <mat-icon>arrow_back_ios</mat-icon>
         </button>

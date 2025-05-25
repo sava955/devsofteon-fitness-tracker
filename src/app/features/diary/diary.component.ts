@@ -120,7 +120,7 @@ export class DiaryComponent implements OnInit {
       map((response) => response.data as Diary),
       tap((diary: Diary) => {
         this.diary = diary;
-        this.startDate = new Date(diary.startDate);
+        this.startDate = diary.startDate;
         this.handleDiaryMeals();
         this.handleDiaryExercises();
       })
