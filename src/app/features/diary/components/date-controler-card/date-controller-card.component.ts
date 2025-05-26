@@ -42,10 +42,22 @@ export class DateControllerCardComponent implements OnInit, OnChanges {
     }
   }
 
+  isPreviousDisabled(): boolean {
+    const minDate = new Date(this.startDate);
+    minDate.setHours(0, 0, 0, 0);
+
+    return this.getCurrentDay() === minDate.getTime();
+  }
+
   isNextDisabled(): boolean {
+    return this.getCurrentDay() === this.getMaxDate().getTime();
+  }
+
+  getCurrentDay(): number {
     const currentDay = new Date(this.day);
     currentDay.setHours(0, 0, 0, 0);
-    return currentDay.getTime() === this.getMaxDate().getTime();
+
+    return currentDay.getTime();
   }
 
   getMaxDate(): Date {
