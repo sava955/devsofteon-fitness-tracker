@@ -28,7 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     UserDataComponent,
     RouterLink,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -45,10 +45,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getOne({}, 'current-user').subscribe((response) => {
-      this.user = response.data as User;
-      this.goal = this.user.goals[0];
+      this.userService.setAuthenticatedUser(response.data as User);
+    });
 
-      this.userService.setAuthenticatedUser(this.user);
+    this.userService.getAuthenticatedUser().subscribe((user) => {
+      if (user) {
+        this.user = user!;
+        this.goal = this.user.goals[0];
+      }
     });
   }
 
